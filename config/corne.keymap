@@ -1,0 +1,164 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+&sk {
+    release-after-ms = <2000>;
+    quick-release;
+};
+
+&lt { flavor = "balanced"; };
+
+/ {
+    behaviors {
+        enter_to_nav: enter_to_nav {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ENTER_TO_NAV";
+            bindings = <&kp ENTER>, <&to 1>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        vsc_def_impl: vsc_def_impl {
+            compatible = "zmk,behavior-mod-morph";
+            label = "VSC_DEF_IMPL";
+            bindings = <&kp LA(LG(BACKSLASH))>, <&kp LS(F12)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RSFT|MOD_LSFT)>;
+        };
+
+        enter_to_alpha: enter_to_alpha {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ENTER_TO_ALPHA";
+            bindings = <&kp ENTER>, <&to 0>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    macros {
+        vsc_del_line: vsc_del_line {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI &kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp D>,
+                <&macro_release>,
+                <&kp LEFT_GUI &kp LEFT_SHIFT>;
+
+            label = "VSC_DEL_LINE";
+        };
+
+        vsc_clean_imprts: vsc_clean_imprts {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI &kp LEFT_ALT>,
+                <&macro_tap>,
+                <&kp I>,
+                <&macro_release>,
+                <&kp LEFT_GUI &kp LEFT_ALT>,
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp K>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+
+            label = "VSC_CLEAN_IMPRTS";
+        };
+
+        cmd_tab: cmd_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_tap>,
+                <&kp TAB &kp LEFT_GUI>,
+                <&macro_release>,
+                <&kp LEFT_GUI>;
+
+            label = "CMD_TAB";
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
+            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
+            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
+            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+
+            bindings = <
+&none  &kp Q  &kp W  &kp E          &kp R        &kp T         &kp Y  &kp U  &kp I          &kp O    &kp ESCAPE  &none
+&none  &kp A  &kp S  &kp D          &kp F        &kp G         &kp H  &kp J  &kp K          &kp L    &kp P       &none
+&to 1  &kp Z  &kp X  &kp C          &kp V        &kp B         &kp N  &kp M  &kp COMMA      &kp DOT  &kp TAB     &none
+                     &enter_to_nav  &lt 4 SPACE  &sk LSHIFT    &mo 3  &mo 2  &kp BACKSPACE
+            >;
+        };
+
+        Nav {
+            bindings = <
+&trans  &kp LC(GRAVE)      &kp LG(GRAVE)  &cmd_tab         &kp LG(W)       &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans    &trans
+&trans  &kp LEFT_CONTROL   &kp LEFT_ALT   &kp LGUI         &kp LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp CAPS  &trans
+&to 0   &vsc_clean_imprts  &kp LG(P)      &kp LG(F)        &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &trans    &trans
+                                          &enter_to_alpha  &trans          &trans           &trans         &trans          &trans
+            >;
+        };
+
+        Symbol {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
+            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
+            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&trans  &kp PERCENT     &kp LESS_THAN    &kp SINGLE_QUOTE  &kp GREATER_THAN  &kp DOUBLE_QUOTES    &kp GRAVE     &kp LEFT_BRACE        &kp DOLLAR     &kp RIGHT_BRACE        &kp CARET  &trans
+&trans  &kp UNDERSCORE  &kp EXCLAMATION  &kp EQUAL         &kp PIPE          &kp AMPERSAND        &kp QUESTION  &kp LEFT_PARENTHESIS  &kp COLON      &kp RIGHT_PARENTHESIS  &kp TILDE  &trans
+&trans  &kp ASTERISK    &kp BSLH         &kp MINUS         &kp SLASH         &kp PLUS             &kp AT_SIGN   &kp LEFT_BRACKET      &kp SEMICOLON  &kp RIGHT_BRACKET      &kp HASH   &trans
+                                         &trans            &trans            &trans               &trans        &trans                &trans
+            >;
+        };
+
+        Num_fn {
+            bindings = <
+&trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12    &trans  &kp N7  &kp N8  &kp N9  &trans  &trans
+&trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11    &trans  &kp N4  &kp N5  &kp N6  &trans  &trans
+&trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10    &kp N0  &kp N1  &kp N2  &kp N3  &trans  &trans
+                        &trans  &trans  &trans     &trans  &trans  &trans
+            >;
+        };
+
+        Magic {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &kp BSPC
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
+&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &trans    &trans    &trans     &trans  &trans
+                                        &kp LGUI      &trans        &kp SPACE       &kp RET   &trans    &kp RALT
+            >;
+        };
+    };
+};
