@@ -13,7 +13,7 @@
     quick-release;
 };
 
-&lt { flavor = "balanced"; };
+&lt { flavor = "hold-preferred"; };
 
 / {
     behaviors {
