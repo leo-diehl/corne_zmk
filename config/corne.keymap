@@ -35,13 +35,14 @@
             mods = <(MOD_RSFT|MOD_LSFT)>;
         };
 
-        enter_to_alpha: enter_to_alpha {
+        space_1_shift: space_1_shift {
             compatible = "zmk,behavior-mod-morph";
-            label = "ENTER_TO_ALPHA";
-            bindings = <&kp ENTER>, <&to 0>;
+            label = "SPACE_1_SHIFT";
+            bindings = <&lt 1 SPACE>, <&kp LEFT_SHIFT>;
 
             #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+            keep-mods = <(MOD_LGUI|MOD_RGUI)>;
         };
     };
 
@@ -106,19 +107,19 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&none           &kp Q  &kp W  &kp E          &kp R        &kp T         &kp Y  &kp U  &kp I          &kp O    &kp ESCAPE  &none
-&sk LEFT_SHIFT  &kp A  &kp S  &kp D          &kp F        &kp G         &kp H  &kp J  &kp K          &kp L    &kp P       &sk RIGHT_SHIFT
-&to 1           &kp Z  &kp X  &kp C          &kp V        &kp B         &kp N  &kp M  &kp COMMA      &kp DOT  &kp TAB     &none
-                              &enter_to_nav  &lt 4 SPACE  &sk LSHIFT    &mo 3  &mo 2  &kp BACKSPACE
+&kp TAB         &kp Q  &kp W  &kp E      &kp R           &kp T           &kp Y          &kp U  &kp I          &kp O    &kp DEL  &kp ESC
+&sk LEFT_SHIFT  &kp A  &kp S  &kp D      &kp F           &kp G           &kp H          &kp J  &kp K          &kp L    &kp P    &sk RIGHT_SHIFT
+&kp CAPSLOCK    &kp Z  &kp X  &kp C      &kp V           &kp B           &kp N          &kp M  &kp COMMA      &kp DOT  &to 1    &sk RCTRL
+                              &kp ENTER  &space_1_shift  &sk LEFT_GUI    &sk RIGHT_ALT  &sl 2  &kp BACKSPACE
             >;
         };
 
         Nav {
             bindings = <
-&trans  &kp LC(GRAVE)      &kp LG(GRAVE)  &cmd_tab         &kp LG(W)       &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans    &trans
-&trans  &kp LEFT_CONTROL   &kp LEFT_ALT   &kp LGUI         &kp LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp CAPS  &trans
-&to 0   &vsc_clean_imprts  &kp LG(P)      &kp LG(F)        &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &trans    &trans
-                                          &enter_to_alpha  &trans          &trans           &trans         &trans          &trans
+&trans  &kp LC(GRAVE)      &kp LG(GRAVE)  &none         &kp LG(W)       &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans    &to 4
+&trans  &sk LEFT_CONTROL   &sk LEFT_ALT   &sk LEFT_GUI  &sk LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp CAPS  &trans
+&none   &vsc_clean_imprts  &kp LG(P)      &kp LG(F)     &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &to 0     &trans
+                                          &none         &trans          &trans           &trans         &trans          &trans
             >;
         };
 
@@ -139,10 +140,10 @@
 
         Num_fn {
             bindings = <
-&trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12    &trans  &kp N7  &kp N8  &kp N9  &trans  &trans
-&trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11    &trans  &kp N4  &kp N5  &kp N6  &trans  &trans
-&trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10    &kp N0  &kp N1  &kp N2  &kp N3  &trans  &trans
-                        &trans  &trans  &trans     &trans  &trans  &trans
+&trans  &trans  &kp F7  &kp F8  &kp F9  &kp F12    &kp K_PLAY_PAUSE  &kp N7  &kp N8  &kp N9  &trans  &trans
+&trans  &trans  &kp F4  &kp F5  &kp F6  &kp F11    &kp K_NEXT        &kp N4  &kp N5  &kp N6  &trans  &trans
+&trans  &trans  &kp F1  &kp F2  &kp F3  &kp F10    &kp N0            &kp N1  &kp N2  &kp N3  &trans  &trans
+                        &trans  &trans  &trans     &trans            &trans  &trans
             >;
         };
 
@@ -154,11 +155,20 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &kp BSPC
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
-&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &trans    &trans    &trans     &trans  &trans
-                                        &kp LGUI      &trans        &kp SPACE       &kp RET   &trans    &kp RALT
+&bootloader  &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &to 0
+&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
+&kp LSHFT    &trans        &trans        &trans        &trans        &trans          &trans    &trans    &trans    &trans     &trans  &trans
+                                         &kp LGUI      &to 0         &kp SPACE       &kp RET   &trans    &kp RALT
             >;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        num {
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 };
