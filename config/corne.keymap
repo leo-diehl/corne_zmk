@@ -116,10 +116,10 @@
 
         Nav {
             bindings = <
-&trans  &kp LC(GRAVE)      &kp LG(GRAVE)  &none         &kp LG(W)       &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans    &to 4
-&trans  &sk LEFT_CONTROL   &sk LEFT_ALT   &sk LEFT_GUI  &sk LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp CAPS  &trans
-&none   &vsc_clean_imprts  &kp LG(P)      &kp LG(F)     &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &to 0     &trans
-                                          &none         &trans          &trans           &trans         &trans          &trans
+&trans  &kp LC(GRAVE)      &kp LG(GRAVE)  &kp LS(LG(N0))  &kp LG(SLASH)   &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans    &to 4
+&trans  &sk LEFT_CONTROL   &sk LEFT_ALT   &sk LEFT_GUI    &sk LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp CAPS  &trans
+&none   &vsc_clean_imprts  &kp LG(P)      &kp LG(F)       &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &to 0     &trans
+                                          &none           &trans          &trans           &trans         &trans          &trans
             >;
         };
 
