@@ -125,7 +125,7 @@
 
         Nav {
             bindings = <
-&trans            &kp LG(GRAVE)       &kp LG(GRAVE)  &kp LS(LG(N0))  &kp LG(SLASH)   &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans      &trans
+&trans            &kp LC(GRAVE)       &kp LG(GRAVE)  &kp LS(LG(N0))  &kp LG(SLASH)   &kp LG(N)        &kp PAGE_UP    &kp HOME        &kp UP_ARROW    &kp END          &trans      &trans
 &kp C_PLAY_PAUSE  &sk LEFT_CONTROL    &sk LEFT_ALT   &sk LEFT_GUI    &sk LEFT_SHIFT  &kp LG(D)        &kp PAGE_DOWN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp C_NEXT  &trans
 &to 4             &vsc_fix_clean_imp  &kp LG(P)      &kp LG(F)       &vsc_del_line   &vsc_def_impl    &kp LG(Z)      &kp LG(V)       &kp LG(C)       &kp LG(X)        &to 0       &trans
                                                      &none           &trans          &trans           &trans         &trans          &trans
