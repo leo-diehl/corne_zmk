@@ -41,8 +41,8 @@
             bindings = <&lt 1 SPACE>, <&kp LEFT_SHIFT>;
 
             #binding-cells = <0>;
-            mods = <(MOD_LGUI|MOD_RGUI)>;
-            keep-mods = <(MOD_LGUI|MOD_RGUI)>;
+            mods = <(MOD_RGUI)>;
+            keep-mods = <(MOD_RGUI)>;
         };
 
         vsc_fix_clean_imp: vsc_fix_clean_imp {
@@ -116,10 +116,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E      &kp R           &kp T           &kp Y          &kp U  &kp I          &kp O    &kp DEL  &kp ESC
-&sk LEFT_SHIFT  &kp A  &kp S  &kp D      &kp F           &kp G           &kp H          &kp J  &kp K          &kp L    &kp P    &sk RIGHT_SHIFT
-&kp CAPSLOCK    &kp Z  &kp X  &kp C      &kp V           &kp B           &kp N          &kp M  &kp COMMA      &kp DOT  &to 1    &sk RCTRL
-                              &kp ENTER  &space_1_shift  &sk LEFT_GUI    &sk RIGHT_ALT  &sl 2  &kp BACKSPACE
+&kp TAB         &kp Q  &kp W  &kp E      &kp R           &kp T            &kp Y          &kp U  &kp I          &kp O    &kp DEL  &kp ESC
+&sk LEFT_SHIFT  &kp A  &kp S  &kp D      &kp F           &kp G            &kp H          &kp J  &kp K          &kp L    &kp P    &sk RIGHT_SHIFT
+&kp CAPSLOCK    &kp Z  &kp X  &kp C      &kp V           &kp B            &kp N          &kp M  &kp COMMA      &kp DOT  &to 1    &sk RCTRL
+                              &kp ENTER  &space_1_shift  &sk RIGHT_GUI    &sk RIGHT_ALT  &sl 2  &kp BACKSPACE
             >;
         };
 
